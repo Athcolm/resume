@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="style.css">
+    <title>CV</title>
+</head>
+<body>
+    <div id="tiles"></div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+        
+        let
+        columns = Math.floor(document.body.clientWidth/100),
+        rows = Math.floor(document.body.clientWidth/100);
+            wrapper = document.getElementById("tiles")
+
+            const createTile = index =>{
+                const tile = document.createElement("div")
+                tile.classList.add("tile")
+                return tile;
+            }
+
+            const createTiles = quantity => {
+                Array.from(Array(quantity)).map((tile,index) => {
+                    wrapper.appendChild(createTile(index));
+                })
+            }
+            
+
+            const createGrid = () => {
+                wrapper.innerHTML = "";
+                columns = Math.floor(document.body.clientWidth/100),
+                rows = Math.floor(document.body.scrollHeight/100);
+
+                wrapper.style.setProperty("--columns",columns)
+                wrapper.style.setProperty("--rows",rows)
+
+                createTiles(columns*rows)
+            }
+
+            window.onresize = () => createGrid();
+            window.onload = () => {createGrid()
+            createTiles(columns*rows);};
+            
+        $(document).ready(function(){
+            $(document).on('keydown', function(event) {
+                if (event.key == "Escape") {
+                    $("#modal_info").fadeOut(50);
+                    $("#info_button").css("z-index","1")
+                    
+                }
+            });
+            $("#background_modal").click(function(){
+                $("#modal_info").fadeOut(50);
+                $("#info_button").css("z-index","1")
+            })
+            
+            $("#info_button").click(function(){
+                console.log("test");
+                $("#modal_info").fadeIn(50)
+                $("#modal_info").css("display","flex")
+                $("#info_button").css("z-index","-1")
+            })
+        })
+    </script>
+    <div id="modal_info">
+        <div id="background_modal"></div>
+        <article>
+            <h2>Informations</h2>
+            <img src="img/info.png" alt="" class="info_icon">
+            <p>soyeur.mathieu@gmail.com</p>
+            <p>+32 470 74 90 23</p>
+            <p>Permis B + voiture</p>
+        </article>
+    </div>
+    
+    <header class="flex-between">
+        
+        <div class="flex">
+            
+            <div id="titre">
+                
+                <strong>Recherche de stage</strong>
+                <h2>Développeur informatique</h2>
+                <h1>Mathieu SOYEUR</h1>
+            </div>     
+        </div>
+        <div id="toggle">
+            <i class="indicator"></i>
+            <script>
+            const html = document.querySelector("html")
+            const toggle = document.getElementById("toggle");
+                    toggle.onclick = ()=>{
+                        html.classList.toggle("light")
+                    }
+            </script>
+        </div>
+        
+        <img src="img/info.png" alt="" id="info_button" class="info_icon">
+        <div id="info">
+            <p>soyeur.mathieu@gmail.com</p>
+            <p>+32 470 74 90 23</p>
+            <p>Permis B + voiture</p>
+            <p>Mons</p>
+        </div>
+        
+    </header>
+    
+    <main>
+        <!-- <div id="presentation" class="cat">
+        
+        </div> -->
+        <div id="education" class="cat">
+            <h3>éducation</h3>
+            
+            <div>
+                <h4>Bachelier en Informatique & systèmes orientation réseaux & télécommunications - HEH</h4>
+                <p class="date">Septembre 2019 - En cours</p>
+            </div>
+            <p>Option développement. </p>
+            <div>
+                <h4>Bachelier en sciences de l'ingénieur industriel - HEH</h4>
+                <p class="date">Septembre 2018 - Juin 2019 (Bac 1)</p>
+            </div>
+            <div>
+                <h4>CESS - Athénée Royal de Saint-Ghislain</h4>
+                <p class="date">Juin 2018</p>
+            </div>
+            <p>Option scientifique et mathématique approfondie.</p>
+        </div>
+        <div id="competences" class="cat">
+            
+            <h3>compétences</h3>
+            <h4>Compétences informatiques</h4>
+            <ul>
+                <li>C (arduino, Code::block)</li>
+                <li>C#</li>
+                <li>Microsoft Office (Word, Excel, PowerPoint)</li>
+                <li>Python</li>
+                <li>HTML/CSS</li>
+                <li>Javascript</li>
+                <li>PHP</li>
+                <li>SQL (MySQL)</li>
+                <li>Gimp</li>
+            </ul>
+            <h4>Langues</h4>
+            <ul>
+                <li>Français (Maternel)</li>
+                <li>Anglais (C1)</li>
+            </ul>
+        </div>
+        
+        <div id="interets" class="cat">
+            <h3>centres d'intérêts</h3>
+            <ul>
+                <li>Nouvelles technologies</li>
+                <li>Développement informatique</li>
+                <li>Jeux vidéos</li>
+                
+            </ul>
+
+        </div>
+    </main>
+    <footer>
+        <p></p>
+    </footer>
+</body>
+</html>
